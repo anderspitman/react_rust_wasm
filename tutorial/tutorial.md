@@ -131,7 +131,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 
 function bigComputation() {
-  alert("Big computation in JS");
+  alert("Big computation in JavaScript");
 }
 
 const App = () => {
