@@ -1,3 +1,5 @@
+# Introduction and Motivation
+
 In this post, we're going to show how to compile some Rust code to WebAssembly,
 and integrate it into a React app.
 
