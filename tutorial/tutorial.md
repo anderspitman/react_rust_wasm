@@ -1,7 +1,25 @@
-There are a lot of exciting things happening in the WebAssembly world. This
-tutorial is intended for React developers who are interested in adding some
-WebAssembly to their apps, using the Rust language. I'm going to assume you
-already know what WebAssembly and Rust are and why you might want to do this.
+In this post, we're going to show how to compile some Rust code to WebAssembly,
+and integrate it into a React app.
+
+Why would we want to do this?
+
+It has become very popular in recent years for JavaScript to be used as a
+compilation target. In other words, developers are writing code in other
+languages, and compiling that code to JavaScript. The JavaScript can then be
+run in a standard web browser. CoffeeScript and TypeScript are both 
+examples of this.  Unfortunately, JavaScript was not designed to be used like
+this, which presents some difficult challenges. Some smart people recognized
+this trend, and these challenges, and decided to make WebAssembly (aka WASM).
+WebAssembly is a binary format designed from the ground up to be a compile target for
+the web. This makes it much easier to develop compilers than it is for
+JavaScript, and also opens up lots of potential performance gains. As an
+example, with WASM it's no longer necessary for the browser to parse the code,
+because it's already in a binary format.
+
+There are lots of ways to get started with WebAssembly, and many examples and
+tutorials already out there. This post is specifically targeted at React
+developers who have heard of Rust and/or WebAssembly, and want to experiment
+with including them in a React app.
 
 I will cover only the basics, and try to keep the tooling and complexity to a
 minimum.
@@ -355,3 +373,7 @@ just Rust in the future.
 * [Yew](https://github.com/DenisKolodin/yew) is a Rust framework for writing
 client-side apps. It's heavily inspired by React, but it lets you write your
 app 100% in Rust. 
+
+* The excellent [New Rustacean](https://newrustacean.com/) podcast recently did
+[an episode](https://newrustacean.com/show_notes/cysk/wasm/index.html) on
+Rust/WASM. I highly recommend giving it a listen.
