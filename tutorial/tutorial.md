@@ -410,6 +410,8 @@ This tutorial was aimed at React developers who just want to get their feet
 wet. Here are a few other resources you can check out if you want to go
 deeper.
 
+* Check out [this great post](https://rustwasm.github.io/2018/06/25/vision-for-rust-and-wasm.html)
+to get an idea of the goals and vision for Rust/WASM.
 * [rustwasm/team](https://github.com/rustwasm/team). This seems to be the
 central repository for keeping up with the current state of Rust and WebAssembly.
 It's a fantastic resource.
