@@ -236,12 +236,67 @@ pub fn big_computation() {
 }
 ```
 
-For the purposes of this tutorial, it's not too important to understand
-everything that's going on here. Basically, decorating Rust code with
-`wasm_bindgen` bridges that piece of code to JavaScript. In this case,
-the extern section is making the JS `alert` function available 
-in our Rust code, while `big_computation` is being made available
-to be called from JS.
+I'll break this down a bit for those who might be new to Rust.
+
+```rust
+#![feature(proc_macro, wasm_custom_section, wasm_import_module)]
+```
+
+The first line is telling the Rust compiler to
+enable some special features to allow the WebAssembly stuff to work. These
+features are only available in the nightly toolchain, which is why we enabled
+it above.
+
+```rust
+extern crate wasm_bindgen;
+```
+
+This is how you include code from externally libraries (known as "crates") in
+Rust.
+
+```rust
+use wasm_bindgen::prelude::*;
+```
+
+Rust has an excellent module system to keep your code cleanly separated. This
+line tells the compiler that we want to be able to directly access everything
+in the `wasm_bindgen::prelude` module. Prelude modules are a convention in the
+Rust community. If you create a library for others to use, it's common to
+include a prelude module which will automatically import the most important
+pieces of your API, to save the user the trouble of individually importing
+everything.
+
+```rust
+#[wasm_bindgen]
+extern {
+    fn alert(s: &str);
+}
+```
+
+The `extern` keyword declares a section of code which is defined outside our
+Rust source. In this case, the `alert` function is defined in JavaScript.
+The `wasm_bindgen` is invoking a Rust macro which bridges that block of JS
+code so it can be used from Rust. Macros in Rust are very powerful. They're
+similar to C/C++ macros in what they can accomplish, but much nicer to use in
+my experience. If you've never used C macros, you can think of a macro as a
+way for the compiler to transform your code or generate new code based on
+parameters provided at compile time. In this case, the `wasm_bindgen`
+macro takes care of generating all the plumbing between Rust and JavaScript,
+based on the function names we provide.
+
+```rust
+#[wasm_bindgen]
+pub fn big_computation() {
+    alert("Big computation in Rust");
+}
+```
+
+This is a normal Rust function, except that once again we're using
+the `wasm_bindgen` macro to generate the plumbing. In this case, the
+`big_computation` function is being made available to be called from
+JavaScript. When called, this function calls the `alert` function, which as
+we saw above is defined in JavaScript. We've set this up to test the complete
+loop of calling from JS to Rust and back to JS.
 
 ## Building
 
